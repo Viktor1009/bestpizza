@@ -9,7 +9,6 @@
     <header>
         <a href="login.php"><img src="/assets/Geomerun.png" alt=""></a>
         <h1>Gio Fazbear's Pizza Place</h1>
-        <a href="add.php">Go back</a> <br />
         <?php
     include("../conn.php");
     $sql = "SELECT content FROM info WHERE type = 'Image'";
