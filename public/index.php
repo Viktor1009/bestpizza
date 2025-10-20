@@ -1,0 +1,53 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="login.php"><img src="/assets/Geomerun.png" alt=""></a>
+        <h1>Gio Fazbear's Pizza Place</h1>
+        <a href="add.php">Go back</a> <br />
+        <?php
+    include("../conn.php");
+    $sql = "SELECT content FROM info WHERE type = 'Image'";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){ 
+            ?>
+            <img src="<?php echo $row["content"]; ?>" alt="">
+            <?php
+        }
+        ?>
+        
+    </header>
+    <section>
+    <?php
+    }
+    $sql = "SELECT name, type, cost FROM pizzas";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){   
+            ?>
+            <h3><?php echo $row["name"]; ?></h3>
+            <p>
+                <?php echo $row["type"]; ?>
+                <span>
+                    <?php echo $row["cost"]; ?>
+                </span>
+            </p>
+
+        <?php
+        }
+    }
+    ?>
+    </section>
+    <footer>
+
+    </footer>
+</body>
+</html>
+</body>
+</html>
