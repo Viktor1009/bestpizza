@@ -16,9 +16,9 @@
         <input type="text"  name="database" placeholder="Database">
         <input type="text"  name="password" placeholder="Password">
         <input type="text"  name="user" placeholder="User">
-        <input type="text"  name="loginpassword" placeholder="">
-        <input type="text"  name="loginemail" placeholder="User">
-        <input type="submit" name="go" >
+        <input type="password"  name="loginpassword" placeholder="User Password">
+        <input type="text"  name="loginemail" placeholder="User Email">
+        <input type="submit" name="go">
     </form>
     
 </body>

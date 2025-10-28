@@ -11,9 +11,18 @@ $env = [
 $conn = mysqli_connect($env["DB_HOST"], $env["DB_USER"], $env["DB_PASSWORD"], $env["DB_DATABASE"]);
 if(!$conn) {
     die("connection failer:" . mysqli_connect_error());
-} 
+    echo "database info incorrect";
+}
 else 
 {
+    $result = $conn->query("SHOW TABLES LIKE 'meny'");
+    if ($result->num_rows != 0) {
+        echo "Table meny already exist.";
+    } 
+    else 
+    {
+
+    
     $content = "";
     foreach ($env as $key => $value) {
         $content .= "{$key}={$value}\n";
@@ -31,7 +40,7 @@ else
         type VARCHAR(500),
         cost VARCHAR INT(11) NOT NULL
     )";
-    $createadmin = $conn->query($sql);
+    $createpizzas = $conn->query($sql);
 
     $sql = "CREATE TABLE IF NOT EXISTS admin (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,7 +54,7 @@ else
         type VARCHAR(25) NOT NULL,
         cost VARCHAR(1000)
     )";
-    $createadmin = $conn->query($sql);
+    $createinfo = $conn->query($sql);
 
     $somearray = [
         ['Image', ''],
@@ -58,9 +67,7 @@ else
         $conn->query("INSERT INTO info (type, content) VALUES ('$type', '$content')");
     }
     $conn->query("INSERT INTO admin (email, password) VALUES ('viktorosterberg10@gmail.com', '123')");
-    $conn->query("INSERT INTO pizzas (name, type, cost) VALUES ('testPizza', 'testToppings', 'testPrice kr')");
-
-
+    $conn->query("INSERT INTO pizzas (name, type, cost) VALUES ('testPizza', 'testToppings', 'testPrice')");
 }
-
+}
 ?>
