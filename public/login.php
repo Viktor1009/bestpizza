@@ -17,9 +17,10 @@
         $result = $stmt->get_result();
 
         $userdatafromdb = $result->fetch_assoc();
-
-        if($userdatafromdb["password"] == $_POST["password"]){
-            echo '<a href="add.php">Add Pizzas</a>';
+        if(password_verify($_POST['password'], $userdatafromdb["password"])) {
+            $_SESSION["gio"] = true;
+            header("Location: /add.php");
+            exit;
         }
        
         $conn->close();

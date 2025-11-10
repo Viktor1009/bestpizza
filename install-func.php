@@ -38,9 +38,9 @@ else
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(25) NOT NULL,
         type VARCHAR(500),
-        cost VARCHAR INT(11) NOT NULL
+        cost INT(11) NOT NULL
     )";
-    $createpizzas = $conn->query($sql);
+    $conn->query($sql);
 
     $sql = "CREATE TABLE IF NOT EXISTS admin (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,7 +52,7 @@ else
     $sql = "CREATE TABLE IF NOT EXISTS info (
         id INT AUTO_INCREMENT PRIMARY KEY,
         type VARCHAR(25) NOT NULL,
-        cost VARCHAR(1000)
+        content VARCHAR(1000)
     )";
     $createinfo = $conn->query($sql);
 
@@ -66,8 +66,12 @@ else
         $content = $row[1];
         $conn->query("INSERT INTO info (type, content) VALUES ('$type', '$content')");
     }
-    $conn->query("INSERT INTO admin (email, password) VALUES ('viktorosterberg10@gmail.com', '123')");
-    $conn->query("INSERT INTO pizzas (name, type, cost) VALUES ('testPizza', 'testToppings', 'testPrice')");
+    $stmt = $conn->prepare("INSERT INTO admin (email, password) VALUES (?,?)");
+    $stmt->bind_param("ss", $_POST['loginemail'], password_hash($_POST['loginpassword'], PASSWORD_DEFAULT));
+    $stmt->execute();
+    $stmt->close();
+    //$conn->query("INSERT INTO admin (email, password) VALUES (" . $_POST['loginemail']} . ", " . password_hash($_POST['loginpassword'], PASSWORD_DEFAULT) . ")");
+    $conn->query("INSERT INTO pizzas (name, type, cost) VALUES ('testPizza', 'testToppings', 1)");
 }
 }
 ?>

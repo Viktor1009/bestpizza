@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(!$_SESSION["gio"]){
+    //redirect to login;
+    header("Location: /login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
