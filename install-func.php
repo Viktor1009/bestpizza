@@ -7,6 +7,21 @@ $env = [
     'DB_USER' => $_POST["user"],
     'DB_PASSWORD' => $_POST["password"],
 ];
+$conn = mysqli_connect($env["DB_HOST"], $env["DB_USER"], $env["DB_PASSWORD"],);
+if(!$conn) {
+    die("connection failer:" . mysqli_connect_error());
+    echo "database password incorrect";
+} else {
+    $sql = "CREATE DATABASE " . $env["DB_DATABASE"];
+    try {
+        $conn->query($sql);
+        echo "Database created successfully";
+    } catch(mysqli_sql_exception $e){
+        echo "Database already exists";
+    }
+}
+
+
 
 $conn = mysqli_connect($env["DB_HOST"], $env["DB_USER"], $env["DB_PASSWORD"], $env["DB_DATABASE"]);
 if(!$conn) {
@@ -15,12 +30,6 @@ if(!$conn) {
 }
 else 
 {
-    $result = $conn->query("SHOW TABLES LIKE 'meny'");
-    if ($result->num_rows != 0) {
-        echo "Table meny already exist.";
-    } 
-    else 
-    {
 
     
     $content = "";
@@ -73,5 +82,5 @@ else
     //$conn->query("INSERT INTO admin (email, password) VALUES (" . $_POST['loginemail']} . ", " . password_hash($_POST['loginpassword'], PASSWORD_DEFAULT) . ")");
     $conn->query("INSERT INTO pizzas (name, type, cost) VALUES ('testPizza', 'testToppings', 1)");
 }
-}
+
 ?>
