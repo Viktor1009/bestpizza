@@ -17,7 +17,7 @@
         $result = $stmt->get_result();
 
         $userdatafromdb = $result->fetch_assoc();
-        if(password_verify($_POST['password'], $userdatafromdb["password"])) {
+        if(password_verify($_POST["password"], $userdatafromdb["password"])) {
             $_SESSION["gio"] = true;
             header("Location: /add.php");
             exit;
